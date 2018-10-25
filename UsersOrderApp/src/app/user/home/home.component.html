@@ -1,37 +1,54 @@
 <div>
-<mat-form-field>
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-  </mat-form-field>
-  
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  
-    <!-- Position Column -->
-    <ng-container matColumnDef="orderId">
-      <th mat-header-cell *matHeaderCellDef> orderId. </th>
-      <td mat-cell *matCellDef="let element"> {{element.orderId}} </td>
-    </ng-container>
-  
-    <!-- Name Column -->
-    <ng-container matColumnDef="orderDetail">
-      <th mat-header-cell *matHeaderCellDef> orderDetail </th>
-      <td mat-cell *matCellDef="let element"> {{element.orderDetail}} </td>
-    </ng-container>
-  
-    <!-- Weight Column -->
-    <ng-container matColumnDef="quantity">
-      <th mat-header-cell *matHeaderCellDef> quantity </th>
-      <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
-    </ng-container>
-  
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="quantityUnit">
-      <th mat-header-cell *matHeaderCellDef> quantityUnit </th>
-      <td mat-cell *matCellDef="let element"> {{element.quantityUnit}} </td>
-    </ng-container>
-  
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    <mat-drawer-container class="example-container">
+        <mat-drawer mode="side" opened>
+          <app-customsidebar></app-customsidebar>
+        
+        </mat-drawer>
+        <mat-drawer-content>
+         
+          <mat-form-field>
+              <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+            </mat-form-field>
+            
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            
+              <!-- Position Column -->
+              <ng-container matColumnDef="materialid">
+                <th mat-header-cell *matHeaderCellDef> MaterialId </th> 
+                <td mat-cell *matCellDef="let element"> {{element.materialid}} </td>
+              </ng-container>
+            
+              <!-- Name Column -->
+              <ng-container matColumnDef="materialname">
+                <th mat-header-cell *matHeaderCellDef> Material Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.materialname}} </td>
+              </ng-container>
+            
+              <!-- Weight Column -->
+              <ng-container matColumnDef="available">
+                <th mat-header-cell *matHeaderCellDef> quantity </th>
+                <td mat-cell *matCellDef="let element"> {{element.available}} </td>
+              </ng-container>
+            
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="reserved">
+                <th mat-header-cell *matHeaderCellDef> quantityUnit </th>
+                <td mat-cell *matCellDef="let element"> {{element.reserved}} </td>
+              </ng-container>
+              <ng-container matColumnDef="total">
+                <th mat-header-cell *matHeaderCellDef> quantityUnit </th>
+                <td mat-cell *matCellDef="let element"> {{element.total}} </td>
+              </ng-container>
+              <ng-container matColumnDef="unit">
+                <th mat-header-cell *matHeaderCellDef> quantityUnit </th>
+                <td mat-cell *matCellDef="let element"> {{element.unit}} </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+        </mat-drawer-content>
+      </mat-drawer-container>
   </div>
   

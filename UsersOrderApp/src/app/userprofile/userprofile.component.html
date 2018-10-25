@@ -1,0 +1,29 @@
+<div>
+  <mat-drawer-container class="example-container">
+    <mat-drawer mode="side" opened>
+      <app-customsidebar></app-customsidebar>
+    </mat-drawer>
+    <mat-drawer-content>
+      <div class="example-container">
+          <mat-form-field>
+              <input type="text" matInput placeholder="Enter Material Name" [(ngModel)]="addeduser.username" name="materialname"
+                required >
+              <mat-error>Enter product name</mat-error>
+            </mat-form-field>
+            <br />
+
+            <mat-form-field>
+                <input type="text" matInput placeholder="Enter Material Name" [(ngModel)]="addeduser.pwd" name="materialname"
+                  required >
+                <mat-error>Enter product name</mat-error>
+              </mat-form-field>
+              <br />
+        <div *ngFor="let roles of allRoles">
+          <mat-checkbox (change)="checkRole($event, roles.roleid)">{{roles.rolevalue}}</mat-checkbox>
+        </div>
+        <br/>
+        <button type="submit" color="primary" mat-raised-button (click)="posubmit()">Confirm User Role</button>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>

@@ -1,0 +1,47 @@
+<div>
+  <mat-drawer-container class="example-container">
+    <mat-drawer mode="side" opened>
+      <app-customsidebar></app-customsidebar>
+    </mat-drawer>
+    <mat-drawer-content>
+      <mat-tab-group>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+           Add Old Material
+          </ng-template>
+          <div class="example-container">
+        
+            <mat-form-field>
+              <input type="text" matInput placeholder="Enter Material Name" [(ngModel)]="material.name" name="materialname"
+                required >
+              <mat-error>Enter product name</mat-error>
+            </mat-form-field>
+            <br />
+
+            <mat-form-field>
+                <mat-select placeholder="Units" [(ngModel)]="material.unit" name="ponormalunitofpurchase" required>
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let animal of units" [value]="animal.id">
+                    {{animal.name}}
+                  </mat-option>
+                </mat-select>
+
+              </mat-form-field>
+            <br />
+            <mat-form-field>
+              <input type="number" matInput placeholder="Enter Material qty" [(ngModel)]="material.qty" name="materialqty"
+                required >
+              <mat-error>Enter product name</mat-error>
+            </mat-form-field>
+            <br />
+            <button type="submit" color="primary" mat-raised-button (click)="posubmit()">Submit</button>
+          </div>
+        </mat-tab>
+
+      </mat-tab-group>
+
+
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>

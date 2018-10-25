@@ -1,23 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Config } from '../../shared/constants/configuration';
-import { HttpRequestService } from '../../shared/services/http-request.service';
+import { HttpRequestService } from '../shared/services/http-request.service';
+import { Config } from '../shared/constants/configuration';
 
 @Injectable()
-export class LoginService {
+export class PoService {
 
     constructor(private _httpService: HttpRequestService, private _router: Router) { }
 
-    public getAllUsers(user, successcallback) {
+ 
+    public getAllUnits(successcallback) {
         let responseObject: any;
-        const request = {
-            header: {},
-            payload: {
-            username: user.username,
-            userpassword: user.password}
-
-        };
-        this._httpService.postRequest(Config.getEnvironmentVariable('finduser'), request)
+        this._httpService.getRequest(Config.getEnvironmentVariable('units'))
             .subscribe(
                 (data) => {
                     responseObject = data;
@@ -29,9 +23,6 @@ export class LoginService {
                 }
             );
     }
-
-    public getUserByname() {
-
-    }
+    
 
 }

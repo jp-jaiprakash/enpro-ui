@@ -5,17 +5,27 @@ export const commonValues: any = {
 };
 
 export const ENV_PATH: any = {
-    DEV_URL: 'http://127.0.0.1:9090',
+    DEV_URL: 'http://localhost:3000',
     SIT_URL: '',
     UAT_URL: '',
     LOCALHOST_URL: 'http://192.168.1.6:9090',
-}
+};
 
 const SERVICE_URLS_MAP = {
-    finduser: '/user-service/user/login',
+    finduser: '/user/login',
+    materialqty: '/materials/allwithqty',
+    materialall: '/materials/all',
+    units: '/general/units',
+    jobids: '/jobs/jobids',
+    subjobids: '/jobs/subjobids',
+    stockjobids: '/jobs/stockjobids',
+    savenormaljob: '/jobs/savejob',
+    savestocksubjob: '/jobs/savestockjob',
+    rolesall: '/general/userroles',
+
     orderbyuser: '/order-service/order/getAllOrdersByUserId/',
     saveorder: '/order-service/order/addOrderByUser',
-}
+};
 
 export class Config {
 

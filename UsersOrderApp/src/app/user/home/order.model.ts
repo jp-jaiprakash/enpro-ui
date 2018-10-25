@@ -1,10 +1,8 @@
-export interface Orders {
-    // name: string;
-    // position: number;
-    // weight: number;
-    // symbol: string;
-    orderId: number;
-    orderDetail: string;
-    quantity: number;
-    quantityUnit: string;
-  }
+export interface Materials {
+  materialid: number;
+  materialname: string;
+  available: number;
+  reserved: number;
+  total: number;
+  unit: string;
+}

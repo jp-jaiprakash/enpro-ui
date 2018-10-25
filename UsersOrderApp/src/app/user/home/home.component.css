@@ -7,3 +7,13 @@ table {
     font-size: 14px;
     width: 100%;
   }
+
+  .example-container {
+    /* width: 400px; */
+    height: 750px;
+    margin: 10px;
+    /* border: 1px solid #555; */
+  }
+  mat-sidenav {
+    width: 200px;
+  }

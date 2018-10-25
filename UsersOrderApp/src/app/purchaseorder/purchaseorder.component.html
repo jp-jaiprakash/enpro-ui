@@ -1,0 +1,243 @@
+<div>
+  <mat-drawer-container class="example-container">
+    <mat-drawer mode="side" opened>
+      <app-customsidebar></app-customsidebar>
+    </mat-drawer>
+    <mat-drawer-content>
+      <mat-tab-group>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+            Purchase Order(Normal Jobs)
+          </ng-template>
+          <div class="example-container">
+            <mat-form-field>
+              <input matInput placeholder="Select Job ID" aria-label="Job Id" [matAutocomplete]="auto" [formControl]="myControl"
+                id="jobids" [(ngModel)]="ponormal.jobid">
+
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let state of filteredOptions | async " [value]="state">
+                  <span>{{state}}</span>
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+            <br />
+            <mat-form-field>
+              <input matInput placeholder="Select Material Name" aria-label="Material Name" [matAutocomplete]="auto1"
+                [formControl]="myControlMaterials" id="materialname" [(ngModel)]="ponormal.materialname">
+
+              <mat-autocomplete #auto1="matAutocomplete">
+                <mat-option *ngFor="let state of filteredOptionsMaterials | async " [value]="state.name">
+                  <span>{{state.name}}</span>
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+            <br />
+            <mat-form-field>
+              <input type="text" matInput placeholder="Enter Purchase Order Number " [(ngModel)]="ponormal.ponumber" name="ponormalponumber"
+                required (keyup)="ponormal.ponumber=ponormal.ponumber.toUpperCase()">
+              <mat-error>Enter product name</mat-error>
+            </mat-form-field>
+            <br />
+
+            <mat-form-field>
+              <input type="number" matInput placeholder="Required Quantity" [(ngModel)]="ponormal.requiredqty" name="ponormalrequiredqty"
+                required >
+              <mat-error>Enter product name</mat-error>
+            </mat-form-field>
+            <br />
+
+            <mat-form-field>
+              <input type="number" matInput placeholder="Purchased Quantity" [(ngModel)]="ponormal.purchasedqty" name="ponormalpurchasedqty"
+                required >
+              <mat-error>Enter product name</mat-error>
+            </mat-form-field>
+            <br />
+            <mat-form-field>
+                <input matInput [matDatepicker]="picker" placeholder="Choose Date of purchase" [(ngModel)]="ponormal.dateofpurchase"
+                  name="ponormaldateofpurchase" required>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            <br />
+
+            <mat-form-field>
+              <input type="text" matInput placeholder="Cost Per material " [(ngModel)]="ponormal.cost" name="ponormalcost"
+                required >
+              <mat-error>Enter product name</mat-error>
+            </mat-form-field>
+            <br />
+
+            <mat-form-field>
+                <mat-select placeholder="Units" [(ngModel)]="ponormal.unitofpurchase" name="ponormalunitofpurchase" required>
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let animal of units" [value]="animal.id">
+                    {{animal.name}}
+                  </mat-option>
+                </mat-select>
+
+              </mat-form-field>
+            <br />
+            <button type="submit" color="primary" mat-raised-button (click)="posubmit()">Submit</button>
+          </div>
+        </mat-tab>
+
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+            Purchase Order(Sub Jobs)
+          </ng-template>
+          <div class="example-container">
+              <mat-form-field>
+                <input matInput placeholder="Select Job ID" aria-label="Job Id" [matAutocomplete]="autosub" [formControl]="myControlSubJob"
+                  id="jobids" [(ngModel)]="posub.jobid">
+  
+                <mat-autocomplete #autosub="matAutocomplete">
+                  <mat-option *ngFor="let state of filteredOptionsSubJob | async " [value]="state">
+                    <span>{{state}}</span>
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+              <br />
+              <mat-form-field>
+                <input matInput placeholder="Select Material Name" aria-label="Material Name" [matAutocomplete]="automatsub"
+                  [formControl]="myControlMaterialsSubJob" id="materialname" [(ngModel)]="posub.materialname">
+  
+                <mat-autocomplete #automatsub="matAutocomplete">
+                  <mat-option *ngFor="let state of filteredOptionsMaterialsSubJob | async " [value]="state.name">
+                    <span>{{state.name}}</span>
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+              <br />
+              <mat-form-field>
+                <input type="text" matInput placeholder="Enter Purchase Order Number " [(ngModel)]="posub.ponumber" name="posubponumber"
+                  required (keyup)="posub.ponumber=posub.ponumber.toUpperCase()">
+                <mat-error>Enter product name</mat-error>
+              </mat-form-field>
+              <br />
+  
+              <mat-form-field>
+                <input type="number" matInput placeholder="Required Quantity" [(ngModel)]="posub.requiredqty" name="posubrequiredqty"
+                  required >
+                <mat-error>Enter product name</mat-error>
+              </mat-form-field>
+              <br />
+  
+              <mat-form-field>
+                <input type="number" matInput placeholder="Purchased Quantity" [(ngModel)]="posub.purchasedqty" name="posubpurchasedqty"
+                  required >
+                <mat-error>Enter product name</mat-error>
+              </mat-form-field>
+              <br />
+              <mat-form-field>
+                  <input matInput [matDatepicker]="pickersub" placeholder="Choose Date of purchase" [(ngModel)]="posub.dateofpurchase"
+                    name="posubdateofpurchase" required>
+                  <mat-datepicker-toggle matSuffix [for]="pickersub"></mat-datepicker-toggle>
+                  <mat-datepicker #pickersub></mat-datepicker>
+                </mat-form-field>
+              <br />
+  
+              <mat-form-field>
+                <input type="text" matInput placeholder="Cost Per material " [(ngModel)]="posub.cost" name="posubcost"
+                  required >
+                <mat-error>Enter product name</mat-error>
+              </mat-form-field>
+              <br />
+  
+              <mat-form-field>
+                  <mat-select placeholder="Units" [(ngModel)]="posub.unitofpurchase" name="posubunitofpurchase" required>
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let animal of units" [value]="animal.id">
+                      {{animal.name}}
+                    </mat-option>
+                  </mat-select>
+  
+                </mat-form-field>
+              <br />
+              <button type="submit" color="primary" mat-raised-button (click)="posubmit()">Submit</button>
+            </div>
+        </mat-tab>
+
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+            Purchase Order(Stock Jobs)
+          </ng-template>
+          <div class="example-container">
+              <mat-form-field>
+                <input matInput placeholder="Select Job ID" aria-label="Job Id" [matAutocomplete]="autostock" [formControl]="myControlStockJob"
+                  id="stockjobids" [(ngModel)]="postock.jobid">
+  
+                <mat-autocomplete #autostock="matAutocomplete">
+                  <mat-option *ngFor="let state of filteredOptionsStockJob | async " [value]="state">
+                    <span>{{state}}</span>
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+              <br />
+              <mat-form-field>
+                <input matInput placeholder="Select Material Name" aria-label="Material Name" [matAutocomplete]="automatstock"
+                  [formControl]="myControlMaterialsStockJob" id="materialnamestock" [(ngModel)]="postock.materialname">
+  
+                <mat-autocomplete #automatstock="matAutocomplete">
+                  <mat-option *ngFor="let state of filteredOptionsMaterialsStockJob | async " [value]="state.name">
+                    <span>{{state.name}}</span>
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+              <br />
+              <mat-form-field>
+                <input type="text" matInput placeholder="Enter Purchase Order Number " [(ngModel)]="postock.ponumber" name="postockponumber"
+                  required (keyup)="postock.ponumber=postock.ponumber.toUpperCase()">
+                <mat-error>Enter product name</mat-error>
+              </mat-form-field>
+              <br />
+  
+              <mat-form-field>
+                <input type="number" matInput placeholder="Required Quantity" [(ngModel)]="postock.requiredqty" name="postockrequiredqty"
+                  required >
+                <mat-error>Enter product name</mat-error>
+              </mat-form-field>
+              <br />
+  
+              <mat-form-field>
+                <input type="number" matInput placeholder="Purchased Quantity" [(ngModel)]="postock.purchasedqty" name="postockpurchasedqty"
+                  required >
+                <mat-error>Enter product name</mat-error>
+              </mat-form-field>
+              <br />
+              <mat-form-field>
+                  <input matInput [matDatepicker]="pickersstock" placeholder="Choose Date of purchase" [(ngModel)]="postock.dateofpurchase"
+                    name="postockdateofpurchase" required>
+                  <mat-datepicker-toggle matSuffix [for]="pickersstock"></mat-datepicker-toggle>
+                  <mat-datepicker #pickersstock></mat-datepicker>
+                </mat-form-field>
+              <br />
+  
+              <mat-form-field>
+                <input type="text" matInput placeholder="Cost Per material " [(ngModel)]="postock.cost" name="postockcost"
+                  required >
+                <mat-error>Enter product name</mat-error>
+              </mat-form-field>
+              <br />
+  
+              <mat-form-field>
+                  <mat-select placeholder="Units" [(ngModel)]="postock.unitofpurchase" name="postockunitofpurchase" required>
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let animal of units" [value]="animal.id">
+                      {{animal.name}}
+                    </mat-option>
+                  </mat-select>
+  
+                </mat-form-field>
+              <br />
+              <button type="submit" color="primary" mat-raised-button (click)="postocksubmit()">Submit</button>
+            </div>
+        </mat-tab>
+      </mat-tab-group>
+
+
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>

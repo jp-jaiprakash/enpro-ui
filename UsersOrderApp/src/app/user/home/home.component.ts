@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {  Orders } from './order.model';
+import {   Materials } from './order.model';
 import { MatTableDataSource, MatPaginator } from '../../../../node_modules/@angular/material';
 import { HomeService } from './home.service';
 import { Router } from '../../../../node_modules/@angular/router';
@@ -13,8 +13,10 @@ import { Router } from '../../../../node_modules/@angular/router';
 export class HomeComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  public x: Orders[] = [  ];
-  displayedColumns: string[] = ['orderId', 'orderDetail', 'quantity', 'quantityUnit'];
+  public x: Materials[] = [  ];
+  displayedColumns: string[] = [
+    'materialid', 'materialname', 'available', 'reserved', 'total', 'unit'
+    ];
   public dataSource;
   constructor(private router: Router, private _homeservice: HomeService) { }
 
@@ -23,10 +25,12 @@ export class HomeComponent implements OnInit {
       for (const ord of data) {
 
         const singleitem = {
-          orderId: ord.orderId,
-          orderDetail: ord.orderDetail,
-          quantity: ord.quantity,
-          quantityUnit: ord.quantityUnit
+          materialid: ord.materialid,
+          materialname: ord.materialname,
+          available: ord.available,
+          reserved: ord.reserved,
+          total: ord.total,
+          unit: ord.unitBean && ord.unitBean.unitvalue
         };
         this.x.push(singleitem);
       }
@@ -34,7 +38,7 @@ export class HomeComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       // console.log(data);
     };
-    this._homeservice.getAllOrders(success);
+    this._homeservice.getAllMaterialsWithQty(success);
   }
 
 

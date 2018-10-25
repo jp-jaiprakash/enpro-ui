@@ -24,10 +24,10 @@ export class LoginComponent implements OnInit {
     console.log(form.value);
     const successcallback = (data) => {
       console.log(data);
-      if (data === true) {
-        localStorage.setItem('loggedin', this.user.username);
-        this.router.navigate(['dashboard']);
-      }
+
+      localStorage.setItem('loggedin', this.user.username);
+      this.router.navigate(['dashboard']);
+
     };
     this._loginservice.getAllUsers(this.user, successcallback);
   }

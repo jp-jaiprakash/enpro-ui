@@ -1,16 +1,15 @@
-import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Config } from '../../shared/constants/configuration';
-import { HttpRequestService } from '../../shared/services/http-request.service';
+import { Injectable } from '@angular/core';
+import { HttpRequestService } from '../shared/services/http-request.service';
+import { Config } from '../shared/constants/configuration';
 
 @Injectable()
-export class HomeService {
+export class UserProfileComponentService {
 
     constructor(private _httpService: HttpRequestService, private _router: Router) { }
-
-    public getAllMaterialsWithQty(successcallback) {
+    public getAllUserRoles(successcallback) {
         let responseObject: any;
-        this._httpService.getRequest(Config.getEnvironmentVariable('materialqty'))
+        this._httpService.getRequest(Config.getEnvironmentVariable('rolesall'))
             .subscribe(
                 (data) => {
                     responseObject = data;
@@ -22,4 +21,5 @@ export class HomeService {
                 }
             );
     }
+ 
 }

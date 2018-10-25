@@ -1,8 +1,12 @@
 import { NgModule } from '../../node_modules/@angular/core';
-import {MatSidenavModule, MatMenuModule, MatIconModule, MatButtonModule,
-     MatCardModule, MatDatepickerModule, MatCheckboxModule, MatInputModule, MatNativeDateModule, MatListModule, MatTableModule, MatPaginator, MatPaginatorModule} from '@angular/material';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import {
+    MatSidenavModule, MatMenuModule, MatIconModule, MatButtonModule,
+    MatCardModule, MatDatepickerModule, MatCheckboxModule, MatInputModule, MatNativeDateModule,
+    MatListModule, MatTableModule, MatPaginator, MatPaginatorModule, MatTabsModule, MatAutocompleteModule,
+     MatSelectModule, MatSortModule, MatChipsModule, MatDialogModule
+} from '@angular/material';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
     imports: [
@@ -19,7 +23,13 @@ import {MatFormFieldModule} from '@angular/material/form-field';
         MatIconModule,
         MatListModule,
         MatTableModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        MatTabsModule,
+        MatAutocompleteModule,
+        MatSelectModule,
+        MatSortModule,
+        MatChipsModule,
+        MatDialogModule
     ],
     exports: [
         MatMenuModule,
@@ -35,7 +45,13 @@ import {MatFormFieldModule} from '@angular/material/form-field';
         MatIconModule,
         MatListModule,
         MatTableModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        MatTabsModule,
+        MatAutocompleteModule,
+        MatSelectModule,
+        MatSortModule,
+        MatChipsModule,
+        MatDialogModule
     ]
 })
-export class MaterialModule{}
+export class MaterialModule { }
