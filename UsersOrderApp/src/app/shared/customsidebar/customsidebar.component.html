@@ -1,6 +1,6 @@
 <mat-list>
     <mat-list-item *ngFor="let message of useroptions">
-      <mat-icon matListIcon>folder</mat-icon>
+      <mat-icon matListIcon>{{message.icon}}</mat-icon>
       <h3 matLine class="showpointer" (click)="navigateto(message.route)"> {{message.name}} </h3>
       <!-- <p matLine>
         <span> Jai</span>

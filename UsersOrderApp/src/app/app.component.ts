@@ -14,6 +14,11 @@ export class AppComponent {
 
   logout() {
     localStorage.removeItem('loggedin');
+    localStorage.clear();
     this.router.navigate(['']);
+  }
+
+  gotoprofile() {
+    this.router.navigate(['userprofile']);
   }
 }

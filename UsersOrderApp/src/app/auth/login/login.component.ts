@@ -24,8 +24,17 @@ export class LoginComponent implements OnInit {
     console.log(form.value);
     const successcallback = (data) => {
       console.log(data);
-
+      localStorage.setItem('userid', data.userid);
+      const allowedroles = [];
+      if (data.lstOfRoles && data.lstOfRoles.length > 0) {
+        for (const role of data.lstOfRoles) {
+          allowedroles.push(role.usermapid);
+        }
+      }
+      localStorage.setItem('allowedurls', JSON.stringify(allowedroles));
       localStorage.setItem('loggedin', this.user.username);
+
+      console.log(localStorage.getItem('allowedurls'));
       this.router.navigate(['dashboard']);
 
     };

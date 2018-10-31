@@ -18,8 +18,8 @@ import { JobsComponent } from './user/jobs/jobs.component';
 import { PurchaseorderComponent } from './purchaseorder/purchaseorder.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
 import { JobstatusComponent } from './jobstatus/jobstatus.component';
-import { DialogDemoComponent } from './dialog-demo/dialog-demo.component';
 import { AddoldmaterialComponent } from './addoldmaterial/addoldmaterial.component';
+import { DialogDemoComponent } from './dialog-demo/dialog-demo.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,8 +32,8 @@ import { AddoldmaterialComponent } from './addoldmaterial/addoldmaterial.compone
     PurchaseorderComponent,
     UserprofileComponent,
     JobstatusComponent,
-    DialogDemoComponent,
-    AddoldmaterialComponent
+    AddoldmaterialComponent,
+    DialogDemoComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +46,7 @@ import { AddoldmaterialComponent } from './addoldmaterial/addoldmaterial.compone
     FlexLayoutModule
   ],
   providers: [HttpRequestService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DialogDemoComponent]
 })
 export class AppModule { }

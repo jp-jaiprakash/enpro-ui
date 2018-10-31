@@ -6,23 +6,30 @@
     <mat-drawer-content>
       <div class="example-container">
           <mat-form-field>
-              <input type="text" matInput placeholder="Enter Material Name" [(ngModel)]="addeduser.username" name="materialname"
+              <input type="text" matInput placeholder="Enter User Name" [(ngModel)]="addeduser.username" name="username"
                 required >
-              <mat-error>Enter product name</mat-error>
+              <mat-error>Enter User name</mat-error>
             </mat-form-field>
             <br />
 
             <mat-form-field>
-                <input type="text" matInput placeholder="Enter Material Name" [(ngModel)]="addeduser.pwd" name="materialname"
+                <input type="password" matInput placeholder="Enter User's password" [(ngModel)]="addeduser.pwd" name="userpassword"
                   required >
-                <mat-error>Enter product name</mat-error>
+                <mat-error>Enter User password</mat-error>
               </mat-form-field>
               <br />
+
+              <mat-form-field>
+                  <input type="password" matInput placeholder="Confirm User's password" [(ngModel)]="addeduser.cnfpwd" name="usercnfpassword"
+                    required >
+                  <mat-error *ngIf="pwdnotmatch">Confirm User password</mat-error>
+                </mat-form-field>
+                <br />
         <div *ngFor="let roles of allRoles">
           <mat-checkbox (change)="checkRole($event, roles.roleid)">{{roles.rolevalue}}</mat-checkbox>
         </div>
         <br/>
-        <button type="submit" color="primary" mat-raised-button (click)="posubmit()">Confirm User Role</button>
+        <button type="submit" color="primary" mat-raised-button (click)="addContact()">Confirm User Role</button>
       </div>
     </mat-drawer-content>
   </mat-drawer-container>

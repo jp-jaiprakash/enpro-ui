@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserProfileComponentService } from './userprofile.service.component';
+import { MatDialog } from '@angular/material';
+import { DialogDemoComponent } from '../dialog-demo/dialog-demo.component';
 
 @Component({
   selector: 'app-userprofile',
@@ -8,14 +10,16 @@ import { UserProfileComponentService } from './userprofile.service.component';
   providers: [UserProfileComponentService]
 })
 export class UserprofileComponent implements OnInit {
-
-  constructor(private _userProfileService: UserProfileComponentService) { }
-
+  isPopupOpened = true;
+  pwdnotmatch: boolean;
+  constructor(private _userProfileService: UserProfileComponentService, private dialog?: MatDialog) { }
+  public allowedToCreate = false;
   public allRoles = [];
   public allowedRoles = [];
-  public addeduser ={
-username: '',
-pwd: ''
+  public addeduser = {
+    username: '',
+    pwd: '',
+    cnfpwd: ''
   };
   ngOnInit() {
     this.autopopulate();
@@ -40,5 +44,32 @@ pwd: ''
       }
     }
     console.log(this.allowedRoles);
+  }
+
+  addContact() {
+    this.isPopupOpened = true;
+    this.allowedToCreate = false;
+    const dialogRef = this.dialog.open(DialogDemoComponent, {
+      data: {}
+    });
+
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.isPopupOpened = false;
+      console.log('result', result);
+      if (result === 'closed') {
+        this.allowedToCreate = true;
+        this.addNewUser();
+      }
+    });
+  }
+
+  addNewUser() {
+    this.pwdnotmatch = false;
+    if (this.addeduser.pwd && this.addeduser.cnfpwd && (this.addeduser.pwd === this.addeduser.cnfpwd)) {
+      console.log('ready to call');
+    } else {
+      this.pwdnotmatch = true;
+    }
   }
 }
