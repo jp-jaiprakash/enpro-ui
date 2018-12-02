@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSort, MatTableDataSource } from '@angular/material';
+import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
 import { Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { JObStatusService } from './jobstatus.service.component';
+import { DialogDemoComponent } from '../dialog-demo/dialog-demo.component';
 
 
 export interface PeriodicElement {
@@ -28,23 +30,88 @@ const ELEMENT_DATA: PeriodicElement[] = [
 @Component({
   selector: 'app-jobstatus',
   templateUrl: './jobstatus.component.html',
-  styleUrls: ['./jobstatus.component.css']
+  styleUrls: ['./jobstatus.component.css'],
+  providers: [JObStatusService]
 })
 export class JobstatusComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'changestatus'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  displayedColumns: string[] = ['JobId', 'ClientName', 'LastModified', 'DeliveryDate', 'CurrentStatus'];
+  public dataSource;
+  public dataSourceRunning;
+  public alljobswithstatus;
+  // dataSource = new MatTableDataSource(ELEMENT_DATA);
 
   @ViewChild(MatSort) sort: MatSort;
-  constructor(public dialog: MatDialog) { }
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  constructor(public dialog: MatDialog, private _jobStatusService: JObStatusService) { }
 
 
   ngOnInit() {
-    this.dataSource.sort = this.sort;
+    this.getAlljobswithstatus();
+    this.getAlljobswithstatusRunning();
+    // this.dataSource.sort = this.sort;
   }
 
   changeStatusJob(element) {
     console.log('this is element', element);
   }
+  getAlljobswithstatus() {
+    const successcallback = (data) => {
+      const alljobs = [];
+      for (const j of data) {
+        const x = {
+          jobid: j.jobid,
+          cname: j.clientName,
+          lmodified: j.lastModified,
+          ddate: j.deliverydate,
+          status: this.getStatusValue(j.status)
+        };
+        alljobs.push(x);
+      }
+      this.dataSource = new MatTableDataSource(alljobs);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+    };
+    this._jobStatusService.getByJobStatus('all', successcallback);
+  }
+  getAlljobswithstatusRunning() {
+    const successcallback = (data) => {
+      const alljobs = [];
+      for (const j of data) {
+        const x = {
+          jobid: j.jobid,
+          cname: j.clientName,
+          lmodified: j.lastModified,
+          ddate: j.deliverydate,
+          status: this.getStatusValue(j.status)
+        };
+        alljobs.push(x);
+      }
+      this.dataSourceRunning = new MatTableDataSource(alljobs);
+      this.dataSourceRunning.sort = this.sort;
+      this.dataSourceRunning.paginator = this.paginator;
+    };
+    this._jobStatusService.getByJobStatus('running', successcallback);
+  }
+  public getStatusValue(statusval) {
+    if (statusval === 0) {
+      return 'Created';
+    }
+    if (statusval === 1) {
+      return 'Running';
+    }
+    if (statusval === 2) {
+      return 'Completed';
+    }
+    return '-';
+  }
+  public changestatus() {
+    const dialogRef = this.dialog.open(DialogDemoComponent, {
+      data: {}
+    });
+  }
 
+  public applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 }
 

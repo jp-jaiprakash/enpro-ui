@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PoService } from './addoldmaterial.service.component';
+import { MatDialog } from '@angular/material';
+import { DialogDemoComponent } from '../dialog-demo/dialog-demo.component';
 
 @Component({
   selector: 'app-addoldmaterial',
@@ -12,11 +14,12 @@ export class AddoldmaterialComponent implements OnInit {
   public material = {
     name: '',
     qty: 0,
-    unit: ''
+    unit: '',
+    
   };
 
   public units = [];
-  constructor(private _poservice: PoService) { }
+  constructor(private _poservice: PoService, private dialog?: MatDialog) { }
 
   ngOnInit() {
 
@@ -33,5 +36,25 @@ export class AddoldmaterialComponent implements OnInit {
     };
     this._poservice.getAllUnits(unitsSuccesscallback);
   }
+  public addoldmaterial() {
+    const dialogRef = this.dialog.open(DialogDemoComponent, {
+      data: {}
+    });
 
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'closed') {
+        const successcallback = (data) => {
+          this.material = {
+            name: '',
+            qty: 0,
+            unit: ''
+          };
+        };
+        this._poservice.submitOldMaterial(this.material, successcallback);
+
+      }
+    });
+
+  }
 }

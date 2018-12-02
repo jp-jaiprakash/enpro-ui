@@ -6,7 +6,8 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/throw';
+import 'rxjs/add/Observable/throw';
+import { throwError } from 'rxjs';
 
 @Injectable()
 export class HttpRequestService {
@@ -29,7 +30,16 @@ export class HttpRequestService {
 
     return this.http.post(urlPath, postData, options)
       .map((resObj: Response) => resObj.json())
-      .catch((errorObj: any) => Observable.throw(errorObj.json().error || 'Server Error'));
+      .catch((res: Response) => this.onError(res));
+  }
+  onError(res: Response) {
+    const statusCode = res.status;
+    const body = res.json();
+    const error = {
+      statusCode: statusCode,
+      error: body.error
+    };
+    return throwError(error);
   }
 
 }

@@ -20,6 +20,7 @@ import { UserprofileComponent } from './userprofile/userprofile.component';
 import { JobstatusComponent } from './jobstatus/jobstatus.component';
 import { AddoldmaterialComponent } from './addoldmaterial/addoldmaterial.component';
 import { DialogDemoComponent } from './dialog-demo/dialog-demo.component';
+import { ExportexcelComponent } from './exportexcel/exportexcel.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +34,8 @@ import { DialogDemoComponent } from './dialog-demo/dialog-demo.component';
     UserprofileComponent,
     JobstatusComponent,
     AddoldmaterialComponent,
-    DialogDemoComponent
+    DialogDemoComponent,
+    ExportexcelComponent
   ],
   imports: [
     BrowserModule,

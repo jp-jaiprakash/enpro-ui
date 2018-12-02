@@ -3,6 +3,8 @@ import { PoService } from './purchaseorder.service.component';
 import { Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { startWith, map } from 'rxjs/operators';
+import { MatDialog } from '@angular/material';
+import { DialogDemoComponent } from '../dialog-demo/dialog-demo.component';
 
 @Component({
   selector: 'app-purchaseorder',
@@ -12,7 +14,7 @@ import { startWith, map } from 'rxjs/operators';
 })
 export class PurchaseorderComponent implements OnInit {
 
-  constructor(private _poservice: PoService) { }
+  constructor(private _poservice: PoService, private dialog?: MatDialog) { }
 
   public ponormal = {
     jobid: '',
@@ -59,14 +61,14 @@ export class PurchaseorderComponent implements OnInit {
   filteredOptionsMaterials: Observable<string[]>;
   myControlMaterials = new FormControl();
 
-  //Sub jobs
+  // Sub jobs
   filteredOptionsSubJob: Observable<string[]>;
   myControlSubJob = new FormControl();
 
   filteredOptionsMaterialsSubJob: Observable<string[]>;
   myControlMaterialsSubJob = new FormControl();
 
-  //stock jobs
+  // stock jobs
   filteredOptionsStockJob: Observable<string[]>;
   myControlStockJob = new FormControl();
 
@@ -190,11 +192,80 @@ export class PurchaseorderComponent implements OnInit {
     return this.materials.filter(option => option.name.toLowerCase().includes(filterValue));
   }
 
-  public posubmit() {
-    console.log(this.ponormal);
+  public posubmit(type) {
+    const dialogRef = this.dialog.open(DialogDemoComponent, {
+      data: {}
+    });
+
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'closed') {
+        const successcallback = (data) => {
+          this.posub = {
+            jobid: '',
+            materialname: '',
+            ponumber: '',
+            requiredqty: '',
+            purchasedqty: '',
+            dateofpurchase: '',
+            cost: '',
+            unitofpurchase: ''
+          };
+          this.ponormal = {
+            jobid: '',
+            materialname: '',
+            ponumber: '',
+            requiredqty: '',
+            purchasedqty: '',
+            dateofpurchase: '',
+            cost: '',
+            unitofpurchase: ''
+          };
+          this.postock = {
+            jobid: '',
+            materialname: '',
+            ponumber: '',
+            requiredqty: '',
+            purchasedqty: '',
+            dateofpurchase: '',
+            cost: '',
+            unitofpurchase: ''
+          };
+        };
+        if (type === 1) {
+          this._poservice.savenormaljobpo(this.ponormal, successcallback);
+        } else if (type === 2) {
+
+          this._poservice.savenormaljobpo(this.posub, successcallback);
+        } else if (type === 3) {
+          this._poservice.savenormaljobpo(this.postock, successcallback);
+        }
+      }
+    });
   }
 
   public postocksubmit() {
-    console.log(this.postock);
+    const dialogRef = this.dialog.open(DialogDemoComponent, {
+      data: {}
+    });
+
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'closed') {
+        const successcallback = (data) => {
+          this.postock = {
+            jobid: '',
+            materialname: '',
+            ponumber: '',
+            requiredqty: '',
+            purchasedqty: '',
+            dateofpurchase: '',
+            cost: '',
+            unitofpurchase: ''
+          };
+        };
+        this._poservice.savenormaljobpo(this.postock, successcallback);
+      }
+    });
   }
 }

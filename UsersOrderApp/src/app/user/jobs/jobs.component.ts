@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup, NgForm } from '@angular/forms';
 // import { FormControl } from '../../../../node_modules/@angular/forms';
 import { Observable } from '../../../../node_modules/rxjs/Observable';
 // import { map } from '../../../../node_modules/rxjs-compat/operator/map';
 import { map, startWith } from 'rxjs/operators';
 import { JobsComponentService } from './jobs.service.component';
 import { Router } from '../../../../node_modules/@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogDemoComponent } from 'src/app/dialog-demo/dialog-demo.component';
 
 
 export interface MaterialAll {
@@ -42,6 +44,7 @@ export class JobsComponent implements OnInit {
   public units = [];
 
   materials: MaterialAll[] = [];
+  public fstock: FormGroup;
   ngOnInit(): void {
     const successcallback = (data) => {
       if (data && data.length > 0) {
@@ -68,8 +71,15 @@ export class JobsComponent implements OnInit {
     };
     this._jobservice.getAllUnits(unitsSuccesscallback);
 
+    // this.fstock = new FormGroup({
+    //   stockjobid: this.stockjob.jobid,
+    //   stockjobproductname: '',
+    //   stockjobproductqty: '',
+    //   stockjobproductunits: ''
+    // });
+
   }
-  constructor(private router: Router, private _jobservice: JobsComponentService) {
+  constructor(private router: Router, private _jobservice: JobsComponentService, private dialog?: MatDialog) {
     this.filteredStates = this.stateCtrl.valueChanges
       .pipe(
         startWith(''),
@@ -83,27 +93,71 @@ export class JobsComponent implements OnInit {
     return this.materials.filter(state => state.name.toLowerCase().indexOf(filterValue) === 0);
   }
   public onSubmitregularjob(form) {
-    console.log(form);
-    console.log(this.regularjob);
-    const successcallback = (data) => {
-      console.log('data...');
-    };
-    this._jobservice.savenormaljob(this.regularjob, successcallback);
+    const dialogRef = this.dialog.open(DialogDemoComponent, {
+      data: {}
+    });
+
+
+    dialogRef.afterClosed().subscribe(result => {
+      // this.isPopupOpened = false;
+      // console.log('result', result);
+      if (result === 'closed') {
+        // console.log(form);
+        // console.log(this.regularjob);
+        const successcallback = (data) => {
+          // console.log('data...');
+          // cleaning the data
+          this.regularjob = {
+            jobid: '',
+            compleiondate: '',
+            clientname: ''
+          };
+        };
+        this._jobservice.savenormaljob(this.regularjob, successcallback);
+      }
+    });
+
   }
   public onSubmitSubJob(form) {
-    console.log(form);
-    console.log(this.subjob);
-    const successcallback = (data) => {
-      console.log('data...');
-    };
-    this._jobservice.savestocksubjob(this.subjob, 3, successcallback);
+    const dialogRef = this.dialog.open(DialogDemoComponent, {
+      data: {}
+    });
+
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'closed') {
+        const successcallback = (data) => {
+          form.resetForm();
+          this.subjob = {
+            jobid: '',
+            productname: '',
+            prodctqty: '',
+            unit: ''
+          };
+        };
+        this._jobservice.savestocksubjob(this.subjob, 3, successcallback);
+      }
+    });
   }
-  public onSubmitStockJob(form) {
-    console.log(form);
-    console.log(this.subjob);
-    const successcallback = (data) => {
-      console.log('data...');
-    };
-    this._jobservice.savestocksubjob(this.stockjob, 2, successcallback);
+  public onSubmitStockJob(stockform: NgForm) {
+    const dialogRef = this.dialog.open(DialogDemoComponent, {
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      console.log(stockform);
+      if (result === 'closed') {
+        const successcallback = (data) => {
+          stockform.resetForm();
+          // this.stockjob.jobid = '';
+          // this.stockjob.productname = '';
+          // this.stockjob.prodctqty = '';
+          // this.stockjob.unit = '';
+
+        };
+        this._jobservice.savestocksubjob(this.stockjob, 2, successcallback);
+      }
+    });
   }
 }

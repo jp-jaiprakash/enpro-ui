@@ -21,10 +21,12 @@ const SERVICE_URLS_MAP = {
     stockjobids: '/jobs/stockjobids',
     savenormaljob: '/jobs/savejob',
     savestocksubjob: '/jobs/savestockjob',
+    ponormaljob: '/po/save',
     rolesall: '/general/userroles',
-
+    addOldMaterial: '/materials/addOldMaterial',
     orderbyuser: '/order-service/order/getAllOrdersByUserId/',
     saveorder: '/order-service/order/addOrderByUser',
+    jobstatus: '/jobs/jobByStatus/'
 };
 
 export class Config {

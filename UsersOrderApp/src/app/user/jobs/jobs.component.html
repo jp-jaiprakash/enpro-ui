@@ -48,27 +48,27 @@
           <div class="example-container">
             <form class="example-form" #fsub="ngForm" (ngSubmit)="onSubmitSubJob(fsub)">
               <mat-form-field>
-                <input type="text" matInput placeholder="Enter Sub Job Id " [(ngModel)]="subjob.jobid" name="jobid"
+                <input type="text" matInput placeholder="Enter Sub Job Id " [(ngModel)]="subjob.jobid" name="subjobid"
                   required (keyup)="subjob.jobid=subjob.jobid.toUpperCase()">
                 <mat-error>Enter Sub Job ID</mat-error>
               </mat-form-field>
               <br />
 
               <mat-form-field>
-                <input type="text" matInput placeholder="Enter Product name " [(ngModel)]="subjob.productname" name="jobid"
+                <input type="text" matInput placeholder="Enter Product name " [(ngModel)]="subjob.productname" name="subjobproductname"
                   required (keyup)="subjob.productname=subjob.productname.toUpperCase()">
                 <mat-error>Enter product name</mat-error>
               </mat-form-field>
               <br />
 
               <mat-form-field>
-                <input type="number" matInput placeholder="Enter Product quantity" [(ngModel)]="subjob.prodctqty" name="jobid"
+                <input type="number" matInput placeholder="Enter Product quantity" [(ngModel)]="subjob.prodctqty" name="subjobproductqty"
                   required >
                 <mat-error>Enter product quantity</mat-error>
               </mat-form-field>
               <br />
               <mat-form-field>
-                <mat-select placeholder="Units" [(ngModel)]="subjob.unit" name="units" required>
+                <mat-select placeholder="Units" [(ngModel)]="subjob.unit" name="subjobproductunits" required>
                   <mat-option>--</mat-option>
                   <mat-option *ngFor="let animal of units" [value]="animal.id">
                     {{animal.name}}
@@ -91,27 +91,27 @@
             <div class="example-container">
               <form class="example-form" #fstock="ngForm" (ngSubmit)="onSubmitStockJob(fstock)">
                 <mat-form-field>
-                  <input type="text" matInput placeholder="Enter Sub Job Id " [(ngModel)]="stockjob.jobid" name="jobid"
+                  <input type="text" matInput placeholder="Enter Stock Job Id " [(ngModel)]="stockjob.jobid" name="stockjobid"
                     required (keyup)="stockjob.jobid=stockjob.jobid.toUpperCase()">
                   <mat-error>Enter Sub Job ID</mat-error>
                 </mat-form-field>
                 <br />
   
                 <mat-form-field>
-                  <input type="text" matInput placeholder="Enter Product name " [(ngModel)]="stockjob.productname" name="jobid"
+                  <input type="text" matInput placeholder="Enter Product name " [(ngModel)]="stockjob.productname" name="stockjobproductname"
                     required (keyup)="stockjob.productname=stockjob.productname.toUpperCase()">
                   <mat-error>Enter product name</mat-error>
                 </mat-form-field>
                 <br />
   
                 <mat-form-field>
-                  <input type="number" matInput placeholder="Enter Product quantity" [(ngModel)]="stockjob.prodctqty" name="jobid"
+                  <input type="number" matInput placeholder="Enter Product quantity" [(ngModel)]="stockjob.prodctqty" name="stockjobproductqty"
                     required >
                   <mat-error>Enter product quantity</mat-error>
                 </mat-form-field>
                 <br />
                 <mat-form-field>
-                  <mat-select placeholder="Units" [(ngModel)]="stockjob.unit" name="units" required>
+                  <mat-select placeholder="Units" [(ngModel)]="stockjob.unit" name="stockjobproductunits" required>
                     <mat-option>--</mat-option>
                     <mat-option *ngFor="let animal of units" [value]="animal.id">
                       {{animal.name}}

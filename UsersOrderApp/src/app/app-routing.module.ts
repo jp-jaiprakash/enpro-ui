@@ -9,6 +9,7 @@ import { PurchaseorderComponent } from './purchaseorder/purchaseorder.component'
 import { UserprofileComponent } from './userprofile/userprofile.component';
 import { JobstatusComponent } from './jobstatus/jobstatus.component';
 import { AddoldmaterialComponent } from './addoldmaterial/addoldmaterial.component';
+import { ExportexcelComponent } from './exportexcel/exportexcel.component';
 
 const routes: Routes = [
 { path: '', component: LoginComponent},
@@ -21,6 +22,8 @@ const routes: Routes = [
 { path: 'po', component: PurchaseorderComponent},
 { path: 'userprofile', component: UserprofileComponent},
 { path: 'jobstatus', component: JobstatusComponent},
+{ path: 'export', component: ExportexcelComponent},
+
 ];
 
 @NgModule({

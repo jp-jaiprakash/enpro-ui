@@ -62,7 +62,7 @@ export class JobsComponentService {
                     responseObject = data;
                     successcallback(responseObject);
                 },
-                (error) => console.log('err'),
+                (error) => console.log(error),
                 () => {
                     console.log('success jai getAllPRoductsByCate');
                 }
